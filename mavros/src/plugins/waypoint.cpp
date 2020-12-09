@@ -170,8 +170,11 @@ ITEM mav_from_msg(const mavros_msgs::Waypoint &wp, const uint16_t seq){
 	// [[[end]]] (checksum: 0a851ea124b02323fa5259e477db5596)
 
 	ret.seq = seq;
-	ret.mission_type = enum_value(mavlink::common::MAV_MISSION_TYPE::MISSION);
-
+	if(!wp.is_geofence)
+		ret.mission_type = enum_value(mavlink::common::MAV_MISSION_TYPE::MISSION);
+	else
+		ret.mission_type = enum_value(mavlink::common::MAV_MISSION_TYPE::FENCE);
+	
 	return ret;
 }
 
@@ -200,8 +203,11 @@ WP_ITEM_INT mav_from_msg(const mavros_msgs::Waypoint &wp, const uint16_t seq){
 	// [[[end]]] (checksum: bf26a63f03988e41aa372667edcae7d8)
 
 	ret.seq = seq;
-	ret.mission_type = enum_value(mavlink::common::MAV_MISSION_TYPE::MISSION);
-
+	if(!wp.is_geofence)
+		ret.mission_type = enum_value(mavlink::common::MAV_MISSION_TYPE::MISSION);
+	else
+		ret.mission_type = enum_value(mavlink::common::MAV_MISSION_TYPE::FENCE);
+	
 	return ret;
 }
 
